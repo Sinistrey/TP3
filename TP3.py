@@ -31,7 +31,7 @@ def victory_conditions():
 jeu = True
 
 while jeu:
-    if win_streak == 3 and win_streak % 3:
+    if win_streak == 3 and (win_streak % 3 == 0):
         random_monster_strength = random.randint(8, 10) + random.randint(8, 10)
     else:
         random_monster_strength = random.randint(1, 5) + random.randint(1, 5)
