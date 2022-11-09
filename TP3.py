@@ -13,19 +13,26 @@ victory_count = 0
 defeat_count = 0
 win_streak = 0
 
+
 def defeat_conditions():
-    global hp, defeat_count
+    """
+    cette fonction sert a modifier les données au moment d'une défaite
+    """
+    global hp, defeat_count, win_streak
     hp -= random_monster_strength
     defeat_count += 1
+    win_streak = 0
 
 
 def victory_conditions():
+    """
+    cette fonction sert a modifier les données au moment d'une victoire
+    """
     global hp, victory_count, defeated_monster_count, win_streak
     hp += random_monster_strength
     victory_count += 1
     win_streak += 1
     defeated_monster_count += 1
-
 
 
 jeu = True
@@ -55,7 +62,7 @@ while jeu:
         if random_monster_strength >= random_player_strength:
             print("Dernier combat = défaite ")
             defeat_conditions()
-            print(f"Niveau de vie: {hp}")
+            print(f"Niveau de vie: {hp}\n")
             win_streak = 0
             if hp > 0:
                 jeu = True
@@ -65,10 +72,11 @@ while jeu:
         elif random_monster_strength < random_player_strength:
             print("Dernier combat = victoire")
             victory_conditions()
-            print(f"Niveau de vie: {hp}")
+            print(f"Niveau de vie: {hp}\n")
             jeu = True
 
     elif choix == 2:
+        win_streak = 0
         hp -= 1
         print("Vous avez perdu 1 vie."
               f"\nNiveau de vie: {hp}")
@@ -84,7 +92,7 @@ while jeu:
               "\nde vie de l'usager est augmenté de la force de l'adversaire."
               "\nde lune défaite a lieu lorsque la valeur du dé lancé par l'usager"
               "\nest inférieure ou égale à la force de l'adversaire. Dans ce cas,"
-              "\nle niveau de vie de l'usager est diminué de la force de l'adversaire")
+              "\nle niveau de vie de l'usager est diminué de la force de l'adversaire.")
         decision = str(input("Voulez-vous continuer le jeu? o/n"))
         if decision == "o":
             jeu = True
