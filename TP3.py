@@ -33,6 +33,7 @@ def victory_conditions():
     victory_count += 1
     win_streak += 1
     defeated_monster_count += 1
+    print(f"Nombre de victoires consécutifs: {win_streak}")
 
 
 jeu = True
@@ -42,7 +43,7 @@ while jeu:
         random_monster_strength = random.randint(8, 10) + random.randint(8, 10)
     else:
         random_monster_strength = random.randint(1, 5) + random.randint(1, 5)
-    print(f"Vous tombez face avec un adversaire de difficulté : {random_monster_strength}")
+    print(f"Vous tombez face avec un adversaire de difficulté : {random_monster_strength}\n")
     choix = int(input("Que voulez_vous faire?: "
                       "\n1- Combattre cet adversaire "
                       "\n2- Contourner cet adversaire et aller ouvrir une autre porte "
@@ -57,8 +58,8 @@ while jeu:
         print(f"Adversaire : {monster_count}"
               f"\nForce de l'adversaire : {random_monster_strength}"
               f"\nNiveau de vie de l'usager : {hp}"
-              f"\nCombat {combat_count} : {victory_count} victoires vs {defeat_count} defaites"
-              f"\nlancer du de: {random_player_strength}")
+              f"\nCombat {combat_count} : {victory_count} victoires vs {defeat_count} défaites"
+              f"\nlancer du dé: {random_player_strength}")
         if random_monster_strength >= random_player_strength:
             print("Dernier combat = défaite ")
             defeat_conditions()
@@ -79,7 +80,7 @@ while jeu:
         win_streak = 0
         hp -= 1
         print("Vous avez perdu 1 vie."
-              f"\nNiveau de vie: {hp}")
+              f"\nNiveau de vie: {hp}\n")
         if hp > 0:
             jeu = True
         if hp <= 0:
@@ -93,7 +94,7 @@ while jeu:
               "\nde lune défaite a lieu lorsque la valeur du dé lancé par l'usager"
               "\nest inférieure ou égale à la force de l'adversaire. Dans ce cas,"
               "\nle niveau de vie de l'usager est diminué de la force de l'adversaire.")
-        decision = str(input("Voulez-vous continuer le jeu? o/n"))
+        decision = str(input("Voulez-vous continuer le jeu? o/n\n"))
         if decision == "o":
             jeu = True
         elif decision == "n":
