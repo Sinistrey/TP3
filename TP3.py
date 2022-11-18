@@ -37,19 +37,25 @@ def victory_conditions():
 
 
 jeu = True
+is_boss = False
 
 while jeu:
     if win_streak == 3 and (win_streak % 3 == 0):
         random_monster_strength = random.randint(8, 10) + random.randint(8, 10)
+        is_boss = True
     else:
         random_monster_strength = random.randint(1, 5) + random.randint(1, 5)
+        is_boss = False
     print(f"Vous tombez face avec un adversaire de difficulté : {random_monster_strength}\n")
-    choix = int(input("Que voulez_vous faire?: "
-                      "\n1- Combattre cet adversaire "
-                      "\n2- Contourner cet adversaire et aller ouvrir une autre porte "
-                      "\n3- Afficher les règles du jeu  "
-                      "\n4- Quitter la partie "
-                      "\nVotre option:"))
+    print("Que voulez_vous faire?: "
+                      "\n1- Combattre cet adversaire ")
+    print("\n1- Combattre cet adversaire ")
+    if not is_boss:
+        print("\n2- Contourner cet adversaire et aller ouvrir une autre porte ")
+    # "\n3- Afficher les règles du jeu  "
+    # "\n4- Quitter la partie "
+    print("Que voulez_vous faire?: ")
+    choix = int(input("\nVotre option:"))
     if choix == 1:
         monster_count += 1
         combat_count += 1
@@ -65,11 +71,7 @@ while jeu:
             defeat_conditions()
             print(f"Niveau de vie: {hp}\n")
             win_streak = 0
-            if hp > 0:
-                jeu = True
-            if hp <= 0:
-                print(f"La partie est terminée. vous avez tué {defeated_monster_count} monstres")
-                jeu = False
+
         elif random_monster_strength < random_player_strength:
             print("Dernier combat = victoire")
             victory_conditions()
@@ -81,12 +83,6 @@ while jeu:
         hp -= 1
         print("Vous avez perdu 1 vie."
               f"\nNiveau de vie: {hp}\n")
-        if hp > 0:
-            jeu = True
-        if hp <= 0:
-            print(f"La partie est terminée. vous avez tué {defeated_monster_count} monstres")
-            jeu = False
-
     elif choix == 3:
         print("Pour réussir un combat, il faut que la valeur du dé lancé soit"
               "\nsupérieure à la force de l'adversaire. Dans ce cas, le niveau"
@@ -103,4 +99,10 @@ while jeu:
 
     elif choix == 4:
         print("Merci et au revoir...")
+        jeu = False
+
+    if hp > 0:
+        jeu = True
+    elif hp <= 0:
+        print(f"La partie est terminée. vous avez tué {defeated_monster_count} monstres")
         jeu = False
