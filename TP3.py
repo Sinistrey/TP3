@@ -38,7 +38,6 @@ def victory_conditions():
 
 jeu = True
 is_boss = False
-
 while jeu:
     if win_streak == 3 and (win_streak % 3 == 0):
         random_monster_strength = random.randint(8, 10) + random.randint(8, 10)
@@ -47,19 +46,17 @@ while jeu:
         random_monster_strength = random.randint(1, 5) + random.randint(1, 5)
         is_boss = False
     print(f"Vous tombez face avec un adversaire de difficulté : {random_monster_strength}\n")
-    print("Que voulez_vous faire?: "
-                      "\n1- Combattre cet adversaire ")
-    print("\n1- Combattre cet adversaire ")
+    print("Que voulez_vous faire?:")
+    print("1- Combattre cet adversaire ")
+    print("2- Afficher les règles du jeu")
+    print("3-Quitter la partie")
     if not is_boss:
-        print("\n2- Contourner cet adversaire et aller ouvrir une autre porte ")
-    # "\n3- Afficher les règles du jeu  "
-    # "\n4- Quitter la partie "
+        print("4- Contourner cet adversaire et aller ouvrir une autre porte ")
     print("Que voulez_vous faire?: ")
     choix = int(input("\nVotre option:"))
     if choix == 1:
         monster_count += 1
         combat_count += 1
-
         random_player_strength = random.randint(1, 6) + random.randint(1, 6)
         print(f"Adversaire : {monster_count}"
               f"\nForce de l'adversaire : {random_monster_strength}"
@@ -77,7 +74,6 @@ while jeu:
             victory_conditions()
             print(f"Niveau de vie: {hp}\n")
             jeu = True
-
     elif choix == 2:
         win_streak = 0
         hp -= 1
@@ -96,11 +92,9 @@ while jeu:
         elif decision == "n":
             print("Merci et au revoir...")
             jeu = False
-
     elif choix == 4:
         print("Merci et au revoir...")
         jeu = False
-
     if hp > 0:
         jeu = True
     elif hp <= 0:
