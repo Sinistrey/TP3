@@ -36,6 +36,12 @@ def victory_conditions():
     print(f"Nombre de victoires consécutifs: {win_streak}")
 
 
+def quit_game():
+    global jeu
+    print("Merci et au revoir...")
+    jeu = False
+
+
 jeu = True
 is_boss = False
 while jeu:
@@ -54,6 +60,7 @@ while jeu:
         print("4- Contourner cet adversaire et aller ouvrir une autre porte ")
     print("Que voulez_vous faire?: ")
     choix = int(input("\nVotre option:"))
+
     if choix == 1:
         monster_count += 1
         combat_count += 1
@@ -73,13 +80,8 @@ while jeu:
             print("Dernier combat = victoire")
             victory_conditions()
             print(f"Niveau de vie: {hp}\n")
-            jeu = True
+
     elif choix == 2:
-        win_streak = 0
-        hp -= 1
-        print("Vous avez perdu 1 vie."
-              f"\nNiveau de vie: {hp}\n")
-    elif choix == 3:
         print("Pour réussir un combat, il faut que la valeur du dé lancé soit"
               "\nsupérieure à la force de l'adversaire. Dans ce cas, le niveau"
               "\nde vie de l'usager est augmenté de la force de l'adversaire."
@@ -90,11 +92,17 @@ while jeu:
         if decision == "o":
             jeu = True
         elif decision == "n":
-            print("Merci et au revoir...")
-            jeu = False
+            quit_game()
+
+    elif choix == 3:
+        quit_game()
+
     elif choix == 4:
-        print("Merci et au revoir...")
-        jeu = False
+        win_streak = 0
+        hp -= 1
+        print("Vous avez perdu 1 vie."
+              f"\nNiveau de vie: {hp}\n")
+
     if hp > 0:
         jeu = True
     elif hp <= 0:
