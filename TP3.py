@@ -23,7 +23,6 @@ def defeat_conditions():
     defeat_count += 1
     win_streak = 0
     print(f"Nombre de victoires consécutifs: {win_streak}")
-    1
 
 
 def victory_conditions():
