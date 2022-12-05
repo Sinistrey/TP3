@@ -22,6 +22,8 @@ def defeat_conditions():
     hp -= random_monster_strength
     defeat_count += 1
     win_streak = 0
+    print(f"Nombre de victoires consécutifs: {win_streak}")
+    1
 
 
 def victory_conditions():
@@ -36,22 +38,17 @@ def victory_conditions():
     print(f"Nombre de victoires consécutifs: {win_streak}")
 
 
-def quit_game():
-    global jeu
-    print("Merci et au revoir...")
-    jeu = False
-
-
 jeu = True
+is_boss = False
+generate_monster = True
 while jeu:
-    if win_streak == 3 and (win_streak % 3 == 0):
-        random_monster_strength = random.randint(8, 10) + random.randint(8, 10)
-        is_boss = True
-        generate_monster = True
-    else:
-        random_monster_strength = random.randint(1, 5) + random.randint(1, 5)
-        is_boss = False
-        generate_monster = True
+    if generate_monster:
+        if win_streak == 3 and (win_streak % 3 == 0):
+            random_monster_strength = random.randint(8, 10) + random.randint(8, 10)
+            is_boss = True
+        else:
+            random_monster_strength = random.randint(1, 5) + random.randint(1, 5)
+            is_boss = False
     print(f"Vous tombez face avec un adversaire de difficulté : {random_monster_strength}\n")
     print("Que voulez_vous faire?:")
     print("1- Combattre cet adversaire ")
@@ -59,17 +56,12 @@ while jeu:
     print("3- Quitter la partie")
     if not is_boss:
         print("4- Contourner cet adversaire et aller ouvrir une autre porte ")
-    print("Que voulez_vous faire?: ")
     choix = int(input("\nVotre option:"))
-
-    if not generate_monster:
-
-
     if choix == 1:
         monster_count += 1
         combat_count += 1
         random_player_strength = random.randint(1, 6) + random.randint(1, 6)
-        print(f"Adversaire : {monster_count}"
+        print(f"\nAdversaire : {monster_count}"
               f"\nForce de l'adversaire : {random_monster_strength}"
               f"\nNiveau de vie de l'usager : {hp}"
               f"\nCombat {combat_count} : {victory_count} victoires vs {defeat_count} défaites"
@@ -82,25 +74,24 @@ while jeu:
             print("Dernier combat = victoire")
             victory_conditions()
             print(f"Niveau de vie: {hp}\n")
-
+        generate_monster = True
     elif choix == 2:
         print("Pour réussir un combat, il faut que la valeur du dé lancé soit"
               "\nsupérieure à la force de l'adversaire. Dans ce cas, le niveau"
               "\nde vie de l'usager est augmenté de la force de l'adversaire."
               "\nde lune défaite a lieu lorsque la valeur du dé lancé par l'usager"
               "\nest inférieure ou égale à la force de l'adversaire. Dans ce cas,"
-              "\nle niveau de vie de l'usager est diminué de la force de l'adversaire.")
+              "\nle niveau de vie de l'usager est diminué de la force de l'adversaire.\n")
         generate_monster = False
-
     elif choix == 3:
-        quit_game()
-
+        print("Merci et au revoir...")
+        jeu = False
     elif choix == 4:
         win_streak = 0
         hp -= 1
         print("Vous avez perdu 1 vie."
               f"\nNiveau de vie: {hp}\n")
-
+        generate_monster = True
     if hp <= 0:
-        print(f"La partie est terminée. vous avez tué {defeated_monster_count} monstres")
+        print(f"La partie est terminée. Vous avez tué {defeated_monster_count} monstres")
         jeu = False
