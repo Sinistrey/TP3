@@ -43,23 +43,27 @@ def quit_game():
 
 
 jeu = True
-is_boss = False
 while jeu:
     if win_streak == 3 and (win_streak % 3 == 0):
         random_monster_strength = random.randint(8, 10) + random.randint(8, 10)
         is_boss = True
+        generate_monster = True
     else:
         random_monster_strength = random.randint(1, 5) + random.randint(1, 5)
         is_boss = False
+        generate_monster = True
     print(f"Vous tombez face avec un adversaire de difficulté : {random_monster_strength}\n")
     print("Que voulez_vous faire?:")
     print("1- Combattre cet adversaire ")
     print("2- Afficher les règles du jeu")
-    print("3-Quitter la partie")
+    print("3- Quitter la partie")
     if not is_boss:
         print("4- Contourner cet adversaire et aller ouvrir une autre porte ")
     print("Que voulez_vous faire?: ")
     choix = int(input("\nVotre option:"))
+
+    if not generate_monster:
+
 
     if choix == 1:
         monster_count += 1
@@ -74,8 +78,6 @@ while jeu:
             print("Dernier combat = défaite ")
             defeat_conditions()
             print(f"Niveau de vie: {hp}\n")
-            win_streak = 0
-
         elif random_monster_strength < random_player_strength:
             print("Dernier combat = victoire")
             victory_conditions()
@@ -88,11 +90,7 @@ while jeu:
               "\nde lune défaite a lieu lorsque la valeur du dé lancé par l'usager"
               "\nest inférieure ou égale à la force de l'adversaire. Dans ce cas,"
               "\nle niveau de vie de l'usager est diminué de la force de l'adversaire.")
-        decision = str(input("Voulez-vous continuer le jeu? o/n\n"))
-        if decision == "o":
-            jeu = True
-        elif decision == "n":
-            quit_game()
+        generate_monster = False
 
     elif choix == 3:
         quit_game()
@@ -103,8 +101,6 @@ while jeu:
         print("Vous avez perdu 1 vie."
               f"\nNiveau de vie: {hp}\n")
 
-    if hp > 0:
-        jeu = True
-    elif hp <= 0:
+    if hp <= 0:
         print(f"La partie est terminée. vous avez tué {defeated_monster_count} monstres")
         jeu = False
